@@ -3,25 +3,14 @@ const path = require("path");
 const app = express();
 
 app.use(express.urlencoded({extended: true}));
+//express.urlencoded() is needed to send form data
+// express.json() helps express server to recognize the incoming Request Object as a JSON Object.
 app.use(express.json());
+//express.json() and express.urlencoded() are express middlewares
+// used for POST and PUT method. In this exercise, we dont need them.
+// But I put them in any case, to be a bit more informative.
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-
-// It is interesting,if you try to fetch data from "/" route,
-// it will give json <0 error. If you fetch the same data from
-// another route such as "/test4", it will work just fine.
-// thats why I commented out following part. Thats why Home.js 
-// is importing from "/test4"
-/*
-app.get("/", function(req, res){
-    const str = [{
-      "id": "0",
-      "name": "codr",
-      "city": "midyat",
-      "age": "something"
-    }]
-    res.end(JSON.stringify(str));
-});
-*/
 app.get("/test4", function(req, res){
     const str = [{
       id: 1,
